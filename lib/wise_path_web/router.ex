@@ -1,7 +1,7 @@
 defmodule WisePathWeb.Router do
   use WisePathWeb, :router
 
-  alias HealthCheckWeb.Api
+  alias WisePathWeb.Api
 
   pipeline :api do
     plug :accepts, ["json"]
@@ -11,6 +11,7 @@ defmodule WisePathWeb.Router do
     pipe_through :api
 
     get "/health_check", HealthCheckController, :index
+    resources "/paths", PathController, only: [:index]
   end
 
   if Mix.env() in [:dev, :test] do
