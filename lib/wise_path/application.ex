@@ -12,9 +12,10 @@ defmodule WisePath.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: WisePath.PubSub},
       # Start the Endpoint (http/https)
-      WisePathWeb.Endpoint
+      WisePathWeb.Endpoint,
       # Start a worker by calling: WisePath.Worker.start_link(arg)
       # {WisePath.Worker, arg}
+      WisePath.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

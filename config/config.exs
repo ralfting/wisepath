@@ -7,6 +7,13 @@
 # General application configuration
 use Mix.Config
 
+config :wise_path, WisePath.Repo,
+  database: "wise_path_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox
+
 config :wise_path,
   generators: [binary_id: true]
 
@@ -25,6 +32,8 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :wise_path, ecto_repos: [WisePath.Repo]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

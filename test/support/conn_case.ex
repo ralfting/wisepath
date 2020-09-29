@@ -23,6 +23,7 @@ defmodule WisePathWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import WisePathWeb.ConnCase
+      import WisePathWeb.Factory
 
       alias WisePathWeb.Router.Helpers, as: Routes
 
@@ -31,7 +32,13 @@ defmodule WisePathWeb.ConnCase do
     end
   end
 
-  setup _tags do
+  setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(WisePath.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(WisePath.Repo, {:shared, self()})
+    end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
