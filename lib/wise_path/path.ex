@@ -12,9 +12,9 @@ defmodule WisePath.Path do
   end
 
   @doc false
-  def changeset(path, attrs) do
-    path
-    |> cast(attrs, [:title, :descrition])
+  def changeset(target \\ %__MODULE__{}, attrs) do
+    target
+    |> cast(attrs, [:title, :description])
     |> validate_required([:title])
   end
 end

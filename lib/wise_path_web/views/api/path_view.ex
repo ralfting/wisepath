@@ -5,6 +5,8 @@ defmodule WisePathWeb.Api.PathView do
     %{data: Enum.map(paths, &item/1)}
   end
 
+  def render("show.json", %{data: path}), do: %{data: item(path)}
+
   def item(path) do
     %{
       id: path.id,

@@ -1,4 +1,4 @@
-defmodule HealthCheckWeb.Api.HealthCheckController do
+defmodule WisePathWeb.Api.HealthCheckController do
   use WisePathWeb, :controller
 
   def index(conn, _params) do
