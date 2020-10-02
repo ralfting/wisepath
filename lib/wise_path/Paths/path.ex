@@ -1,4 +1,4 @@
-defmodule WisePath.Path do
+defmodule WisePath.Paths.Path do
   use Ecto.Schema
   import Ecto.Changeset
 
