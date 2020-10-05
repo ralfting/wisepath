@@ -30,10 +30,27 @@ defmodule WisePathWeb.Api.PathControllerTest do
       %{"data" => data} =
         conn
         |> post(Routes.api_path_path(conn, :create, body))
-        |> json_response(:ok)
+        |> json_response(:created)
 
       assert data["title"] == body["title"]
       assert data["description"] == body["description"]
+    end
+  end
+
+  describe "UPDATE /paths/:id" do
+    test "update a reposoritory successfully", %{conn: conn} do
+      path = insert(:path)
+
+      body = %{
+        "title" => "title UPDATED"
+      }
+
+      %{"data" => data} =
+        conn
+        |> put(Routes.api_path_path(conn, :update, path.id), %{path: body})
+        |> json_response(:ok)
+
+      assert body["title"] == data["title"]
     end
   end
 end

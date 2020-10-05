@@ -12,4 +12,11 @@ defmodule WisePath.Paths do
     |> WisePath.Paths.Path.changeset()
     |> Repo.insert()
   end
+
+  def update(params) do
+    Path
+    |> Repo.get!(params["id"])
+    |> Ecto.Changeset.cast(params["path"], [:title, :description])
+    |> Repo.update!()
+  end
 end

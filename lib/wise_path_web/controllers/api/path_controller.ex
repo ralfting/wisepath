@@ -13,7 +13,17 @@ defmodule WisePathWeb.Api.PathController do
 
   def create(conn, params) do
     with {:ok, path} <- Paths.create(params) do
-      render(conn, "show.json", data: path)
+      conn
+      |> put_status(:created)
+      |> render("show.json", data: path)
+    end
+  end
+
+  def update(conn, params) do
+    with path = Paths.update(params) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", data: path)
     end
   end
 end
