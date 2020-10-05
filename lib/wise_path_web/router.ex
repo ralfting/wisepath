@@ -11,7 +11,7 @@ defmodule WisePathWeb.Router do
     pipe_through :api
 
     get "/health_check", HealthCheckController, :index
-    resources "/paths", PathController, only: [:index, :create, :update]
+    resources "/paths", PathController, only: [:index, :create, :update, :delete]
   end
 
   if Mix.env() in [:dev, :test] do

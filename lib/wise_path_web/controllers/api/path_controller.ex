@@ -20,7 +20,15 @@ defmodule WisePathWeb.Api.PathController do
   end
 
   def update(conn, params) do
-    with path = Paths.update(params) do
+    with {:ok, path} = Paths.update(params) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", data: path)
+    end
+  end
+
+  def delete(conn, params) do
+    with {:ok, path} = Paths.delete(params) do
       conn
       |> put_status(:ok)
       |> render("show.json", data: path)

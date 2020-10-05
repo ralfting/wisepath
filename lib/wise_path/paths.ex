@@ -17,6 +17,12 @@ defmodule WisePath.Paths do
     Path
     |> Repo.get!(params["id"])
     |> Ecto.Changeset.cast(params["path"], [:title, :description])
-    |> Repo.update!()
+    |> Repo.update()
+  end
+
+  def delete(params) do
+    Path
+    |> Repo.get!(params["id"])
+    |> Repo.delete()
   end
 end

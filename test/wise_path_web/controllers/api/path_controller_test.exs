@@ -53,4 +53,32 @@ defmodule WisePathWeb.Api.PathControllerTest do
       assert body["title"] == data["title"]
     end
   end
+
+  describe "DELETE /paths/:id" do
+    test "path remove successfully", %{conn: conn} do
+      paths = insert_list(5, :path)
+      path = Enum.at(paths, 1)
+
+      %{"data" => paths} = conn |> get_paths()
+
+      assert Enum.count(paths) == 5
+
+      %{"data" => path_removed} =
+        conn
+        |> delete(Routes.api_path_path(conn, :delete, path.id))
+        |> json_response(:ok)
+
+      assert path_removed["id"] == path.id
+
+      %{"data" => paths_removed} = conn |> get_paths()
+
+      assert Enum.count(paths_removed) == 4
+    end
+  end
+
+  defp get_paths(conn) do
+    conn
+    |> get(Routes.api_path_path(conn, :index))
+    |> json_response(:ok)
+  end
 end
