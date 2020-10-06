@@ -13,12 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '11'
+
+    steps:
     - uses: actions/checkout@v2
     - name: Set up Elixir
       uses: actions/setup-elixir@v1
       with:
-        elixir-version: '1.10.3' # Define the elixir version [required]
-        otp-version: '22.3' # Define the OTP version [required]
+        elixir-version: '1.10.3'
+        otp-version: '22.3'
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
