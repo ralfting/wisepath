@@ -21,7 +21,7 @@ defmodule WisePathWeb.Api.PathController do
     with {:ok, path} <- Paths.create(params) do
       conn
       |> put_status(:created)
-      |> render("show.json", data: path)
+      |> render("item.json", data: path)
     end
   end
 
@@ -29,7 +29,7 @@ defmodule WisePathWeb.Api.PathController do
     with {:ok, path} = Paths.update(params) do
       conn
       |> put_status(:ok)
-      |> render("show.json", data: path)
+      |> render("item.json", data: path)
     end
   end
 
@@ -37,7 +37,7 @@ defmodule WisePathWeb.Api.PathController do
     with {:ok, path} = Paths.delete(params) do
       conn
       |> put_status(:ok)
-      |> render("show.json", data: path)
+      |> render("item.json", data: path)
     end
   end
 end

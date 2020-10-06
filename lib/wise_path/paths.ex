@@ -10,7 +10,7 @@ defmodule WisePath.Paths do
   def fetch(params) do
     Path
     |> Repo.get(params["id"])
-    |> Repo.preload(:repositories)
+    |> Repo.preload([:repositories])
   end
 
   def create(params) do

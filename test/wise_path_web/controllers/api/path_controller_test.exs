@@ -32,7 +32,6 @@ defmodule WisePathWeb.Api.PathControllerTest do
       assert data["id"] == path.id
     end
 
-    @tag :skip
     test "response path with repositories", %{conn: conn} do
       path = insert(:path)
       insert(:repository, path: path)
@@ -42,7 +41,7 @@ defmodule WisePathWeb.Api.PathControllerTest do
         |> get(Routes.api_path_path(conn, :show, path.id))
         |> json_response(:ok)
 
-      assert Enum.count(data.repositories) == 1
+      assert Enum.count(data["repositories"]) == 1
     end
   end
 
