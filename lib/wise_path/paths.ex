@@ -7,6 +7,12 @@ defmodule WisePath.Paths do
     |> Repo.all()
   end
 
+  def fetch(params) do
+    Path
+    |> Repo.get(params["id"])
+    |> Repo.preload(:repositories)
+  end
+
   def create(params) do
     params
     |> WisePath.Paths.Path.changeset()

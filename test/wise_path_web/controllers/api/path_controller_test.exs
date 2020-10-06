@@ -2,7 +2,7 @@ defmodule WisePathWeb.Api.PathControllerTest do
   use WisePathWeb.ConnCase, async: true
 
   describe "GET /paths" do
-    test "response paths without repositories", %{conn: conn} do
+    test "response paths", %{conn: conn} do
       [path1, path2] = insert_list(2, :path)
 
       %{"data" => data} =
@@ -17,6 +17,32 @@ defmodule WisePathWeb.Api.PathControllerTest do
 
       assert data2["title"] == path2.title
       assert data2["description"] == path2.description
+    end
+  end
+
+  describe "GET /paths/:id" do
+    test "response path", %{conn: conn} do
+      path = insert(:path)
+
+      %{"data" => data} =
+        conn
+        |> get(Routes.api_path_path(conn, :show, path.id))
+        |> json_response(:ok)
+
+      assert data["id"] == path.id
+    end
+
+    @tag :skip
+    test "response path with repositories", %{conn: conn} do
+      path = insert(:path)
+      insert(:repository, path: path)
+
+      %{"data" => data} =
+        conn
+        |> get(Routes.api_path_path(conn, :show, path.id))
+        |> json_response(:ok)
+
+      assert Enum.count(data.repositories) == 1
     end
   end
 

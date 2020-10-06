@@ -11,6 +11,12 @@ defmodule WisePathWeb.Api.PathController do
     |> render("index.json", %{data: paths})
   end
 
+  def show(conn, params) do
+    with path = Paths.fetch(params) do
+      render(conn, "show.json", data: path)
+    end
+  end
+
   def create(conn, params) do
     with {:ok, path} <- Paths.create(params) do
       conn

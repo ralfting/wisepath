@@ -2,11 +2,15 @@ defmodule WisePath.Paths.Path do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias WisePath.Paths.Repository
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "paths" do
     field(:description, :string)
     field(:title, :string)
+
+    has_many(:repositories, Repository)
 
     timestamps()
   end
