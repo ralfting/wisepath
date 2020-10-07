@@ -1,23 +1,11 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 use Mix.Config
 
-config :wise_path, WisePath.Repo,
-  database: "wise_path_repo",
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+Code.eval_file("./config/dotenv.exs")
 
 config :wise_path,
-  generators: [binary_id: true]
+  generators: [binary_id: true],
+  ecto_repos: [WisePath.Repo]
 
-# Configures the endpoint
 config :wise_path, WisePathWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "03HlOm+2vN4HMB2T/9RWPma+ZOYIL1AnapgOsBfM399/N99HqwJg+LSbos6p67dT",
@@ -25,16 +13,10 @@ config :wise_path, WisePathWeb.Endpoint,
   pubsub_server: WisePath.PubSub,
   live_view: [signing_salt: "44H63hf6"]
 
-# Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :wise_path, ecto_repos: [WisePath.Repo]
-
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

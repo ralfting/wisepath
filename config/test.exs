@@ -9,15 +9,7 @@ config :wise_path, WisePathWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Configure the database for local testing
+# Configure tee database for local testing
 config :wise_path, WisePath.Repo,
-  database: "wise_path_test",
-  hostname: "localhost",
+  url: System.get_env("WISEPATH_DATABASE_TEST_URL"),
   pool: Ecto.Adapters.SQL.Sandbox
-
-# Configure the database for GitHub Actions
-if System.get_env("GITHUB_ACTIONS") do
-  config :wise_path, App.Repo,
-    username: "postgres",
-    password: "postgres"
-end
