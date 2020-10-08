@@ -11,5 +11,5 @@ config :logger, level: :warn
 
 # Configure tee database for local testing
 config :wise_path, WisePath.Repo,
-  url: System.get_env("WISEPATH_DATABASE_TEST_URL"),
+  url: System.get_env("DATABASE_URL"),
   pool: Ecto.Adapters.SQL.Sandbox
