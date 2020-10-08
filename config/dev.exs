@@ -2,7 +2,7 @@ use Mix.Config
 
 config :wise_path, WisePath.Repo,
   pool_size: 10,
-  url: "postgres://postgres:postgres@localhost:5432/wise_path_dev"
+  url: System.get_env("WISEPATH_DATABASE_URL")
 
 config :wise_path, WisePathWeb.Endpoint,
   http: [port: 4000],
