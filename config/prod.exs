@@ -8,6 +8,6 @@ config :logger, level: :info
 
 config :wise_path, WisePath.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: {:system, "DATABASE_URL"}
+  url: System.fetch_env!("DATABASE_URL")
 
 import_config "prod.secret.exs"
