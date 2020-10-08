@@ -1,8 +1,8 @@
-use Mix.Config
+import Config
 
 config :wise_path, WisePath.Repo,
   pool_size: 10,
-  url: System.get_env("WISEPATH_DATABASE_URL")
+  url: System.get_env("DATABASE_URL")
 
 config :wise_path, WisePathWeb.Endpoint,
   http: [port: 4000],

@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 Code.eval_file("./config/dotenv.exs")
 

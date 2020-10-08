@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :wise_path, WisePathWeb.Endpoint,
   url: [host: "example.com", port: 80],
@@ -12,4 +12,3 @@ config :wise_path, WisePath.Repo,
   url: System.fetch_env!("DATABASE_URL"),
   ssl: true
 
-import_config "prod.secret.exs"
