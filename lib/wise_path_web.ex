@@ -24,6 +24,8 @@ defmodule WisePathWeb do
       import Plug.Conn
       import WisePathWeb.Gettext
       alias WisePathWeb.Router.Helpers, as: Routes
+
+      action_fallback WisePathWeb.Api.FallbackController
     end
   end
 

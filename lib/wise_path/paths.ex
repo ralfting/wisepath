@@ -2,15 +2,13 @@ defmodule WisePath.Paths do
   alias WisePath.Repo
   alias WisePath.Paths.Path
 
-  def fetch_all() do
-    Path
-    |> Repo.all()
-  end
+  def fetch_all(), do: Repo.all(Path)
 
-  def fetch(params) do
+  def fetch(id) do
     Path
-    |> Repo.get(params["id"])
+    |> Repo.get(id)
     |> Repo.preload([:repositories])
+    |> as_result()
   end
 
   def create(params) do
@@ -26,9 +24,9 @@ defmodule WisePath.Paths do
     |> Repo.update()
   end
 
-  def delete(params) do
-    Path
-    |> Repo.get!(params["id"])
-    |> Repo.delete()
-  end
+  def delete(path), do: Repo.delete(path)
+
+  defp as_result(%Path{} = path), do: {:ok, path}
+
+  defp as_result(nil), do: {:error, :not_found}
 end
