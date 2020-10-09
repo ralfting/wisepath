@@ -80,6 +80,16 @@ defmodule WisePathWeb.Api.PathControllerTest do
   end
 
   describe "DELETE /paths/:id" do
+    test "response 404 if id doesn\'t exists'", %{conn: conn} do
+      inexistent_path_id = "f0d74da0-0063-4dc6-b7f4-f679b63c391a"
+
+      response =
+        conn
+        |> delete(Routes.api_path_path(conn, :delete, inexistent_path_id))
+
+      assert response.status == 404
+    end
+
     test "path remove successfully", %{conn: conn} do
       paths = insert_list(5, :path)
       path = Enum.at(paths, 1)
@@ -88,12 +98,11 @@ defmodule WisePathWeb.Api.PathControllerTest do
 
       assert Enum.count(paths) == 5
 
-      %{"data" => path_removed} =
+      response =
         conn
         |> delete(Routes.api_path_path(conn, :delete, path.id))
-        |> json_response(:ok)
 
-      assert path_removed["id"] == path.id
+      assert response.status == 204
 
       %{"data" => paths_removed} = conn |> get_paths()
 
