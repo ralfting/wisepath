@@ -2,10 +2,7 @@ defmodule WisePath.Paths do
   alias WisePath.Repo
   alias WisePath.Paths.Path
 
-  def fetch_all() do
-    Path
-    |> Repo.all()
-  end
+  def fetch_all(), do: Repo.all(Path)
 
   def fetch(id) do
     Path
@@ -27,10 +24,7 @@ defmodule WisePath.Paths do
     |> Repo.update()
   end
 
-  def delete(path) do
-    path
-    |> Repo.delete()
-  end
+  def delete(path), do: Repo.delete(path)
 
   defp as_result(%Path{} = path), do: {:ok, path}
 
